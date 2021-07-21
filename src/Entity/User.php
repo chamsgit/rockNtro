@@ -23,19 +23,21 @@ class User
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $role;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function getId(): ?int
     {
@@ -50,18 +52,6 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(?string $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }
@@ -86,6 +76,18 @@ class User
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
