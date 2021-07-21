@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} proposition {% endblock %}
+
+{% block body %}
+    <h1>Votre proposition</h1>
+
+    {{ form_start(formProposition) }}
+        {{ form_row(formProposition.titre) }}
+        {{ form_row(formProposition.artiste) }}
+        {{ form_row(formProposition.lien_spotify) }}
+
+        <button type="submit" class="btn btn-dark">Envoyer</button>
+    {{ form_end(formProposition) }} 
+
+
+
+
+
+
+
+{% endblock %}
