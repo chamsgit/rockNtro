@@ -7,10 +7,10 @@ use App\Entity\Proposition;
 use App\Form\PropositionType;
 use App\Repository\MorceauRepository;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class SiteController extends AbstractController
 {
@@ -48,17 +48,36 @@ class SiteController extends AbstractController
    /**
     * @Route("/proposition", name="proposition")
     */
-   public function proposition(): Response
+   public function proposition(Request $request): Response  //request recuperation des données (GET)
    {
-        $proposition = new Proposition;
+        $proposition = new Proposition; // instanciation de la classe
 
-        $formProposition = $this->createForm(PropositionType::class, $proposition);
+        $formProposition = $this->createForm(PropositionType::class, $proposition);// on reccupére le formulaire
+
+        $formProposition->handleRequest($request);
+
+        //si le formulaire est soumis
+        if($formProposition->isSubmitted()){
+
+                // on enregistre en BDD
+            $em= $this->getDoctrine()->getManager();//($em pour entity manager), ($this pour reccuper les methodes du controleur)
+            $em->persist($proposition);
+            $em->flush();
+
+            // return new Response("Proposition envoyé et en attente de validation");
+
+        }
+
+
 
        return $this->render('site/proposition.html.twig', [
            'controller_name' => 'SiteController',
            'title' => 'Bienvenue',
-           'formProposition' => $formProposition->createView()
-       ]);
+           'formProposition' => $formProposition->createView()       
+
+       ]);;
+       dump($proposition);
+   }
 
    }
 

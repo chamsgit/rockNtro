@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PropositionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    {   // la fonction add permet de créer les champs du fomulaire
         $builder
             ->add('titre')
             ->add('artiste')
@@ -21,7 +21,7 @@ class PropositionType extends AbstractType
         
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)//???
     {
         $resolver->setDefaults([
             'data_class' => Proposition::class,
