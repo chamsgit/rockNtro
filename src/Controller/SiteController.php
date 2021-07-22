@@ -7,6 +7,7 @@ use App\Entity\Proposition;
 use App\Form\PropositionType;
 use App\Repository\MorceauRepository;
 use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,16 +25,25 @@ class SiteController extends AbstractController
         // getRepository() : méthode permettant d'importer la classe Repository d'une entité
 
         // $reproArticles = $this->getDoctrine()->getRepository(Article::class);
-        // dump($reproMorceaux);
+
+        dump($reproMorceaux);
 
         $morceaux = $reproMorceaux->findAll();
-        // dump($morceaux);
-        
+        dump($morceaux);
 
         return $this->render('site/home.html.twig', [
-            'articleBDD' => $morceaux
+
+            'morceauBDD' => $morceaux
+
+            'controller_name' => 'SiteController',
+            'title' => 'Bienvenue',
+
         ]);
     }
+     
+
+
+
 
    /**
     * @Route("/proposition", name="proposition")
