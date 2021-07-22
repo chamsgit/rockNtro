@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome to rockNtro!{% endblock %}</title>
+        <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -12,17 +12,77 @@
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
-
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-    crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
- <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-
+        {# CDN Bootstrap #}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+        {# asset() : fonction TWIG qui retourne le chemin absolu jusqu'au fichier CSS dans le dossier 'public' #}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container">
+            <header class="blog-header py-3">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+
+
+
+                    <a class="link-secondary" href="{{ path('app_register') }}">Créer votre compte</a>
+                </div>
+                <div class="col-4 text-center">
+                    {#<a class="blog-header-logo text-dark" href="#">Large</a>#}
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a class="link-secondary" href="#" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+                    </a>
+                    
+                 
+
+                </div>
+            </header>
+
+            
+
+            <div class="nav-scroller py-1 mb-2">
+                <nav class="nav d-flex justify-content-between">
+                <a class="p-1 link-secondary" href="{{ path('home') }}"><i class="bi bi-house-door-fill"></i></a>
+                <a class="p-1 link-secondary" href="{{ path('proposition')}}">Proprosition</a>
+                {# path() : fonction TWIG permettant de générer une route, une adresse en fonction de son nom définit dans le controlleur, on lui transmet en argument le nom de la route (@Route("", name="blog")) #}
+                {# <a class="p-1 link-secondary" href="{{ path('proposition')}}">Proprosition</a> #}
+                {# <a class="p-2 link-secondary" href="#">Nouvel article new</a>
+                <a class="p-2 link-secondary" href="#">Culture</a>
+                <a class="p-2 link-secondary" href="#">Business</a>
+                <a class="p-2 link-secondary" href="#">Politics</a>
+                <a class="p-2 link-secondary" href="#">Opinion</a>
+                <a class="p-2 link-secondary" href="#">Science</a>
+                <a class="p-2 link-secondary" href="#">Health</a>
+                <a class="p-2 link-secondary" href="#">Style</a>
+                <a class="p-2 link-secondary" href="#">Travel</a> #}
+                </nav>
+            </div>
+            
+            <div class="p-4 p-md-5 mb-4 text-white rounded bandeau-header">
+                <div class="col-md-6 px-0">
+                <h1 class="display-4 fst-italic">RockNtro</h1>
+                <p class="lead my-3">Ici vous trouverez le meilleur Top 50</p>
+                <p class="lead mb-0"><a href="#" class="text-white fw-bold">Acceder au blog</a></p>
+            </div>
+        </div>
+    </div>
+        <main class="container conteneur-base">
+        {% block body %}
+        
+        {% endblock %}
+        </main>
+        <footer class="blog-footer">
+            <p>&copy; 2021 - rockNtro - Tout est RockNRoll</p>
+            <p>
+                <a href="#">Revenir en haut</a>
+            </p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     </body>
 </html>
+
