@@ -18,6 +18,7 @@ class PropositionType extends AbstractType
             //->add('date')
             //->add('user')
         ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)//???
