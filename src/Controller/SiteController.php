@@ -33,7 +33,7 @@ class SiteController extends AbstractController
 
         return $this->render('site/home.html.twig', [
 
-            'morceauBDD' => $morceaux
+            'morceauBDD' => $morceaux,
 
             'controller_name' => 'SiteController',
             'title' => 'Bienvenue',
@@ -81,6 +81,4 @@ class SiteController extends AbstractController
 
    }
 
-  
 
-}
