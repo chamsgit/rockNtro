@@ -28,7 +28,12 @@ class SiteController extends AbstractController
         dump($morceaux);
 
         return $this->render('site/home.html.twig', [
+
             'morceauBDD' => $morceaux
+
+            'controller_name' => 'SiteController',
+            'title' => 'Bienvenue',
+
         ]);
     }
      
