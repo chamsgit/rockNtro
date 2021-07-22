@@ -1,12 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello moi!{% endblock %}
+{% block title %}Hello BlogController!
+{% endblock %}
 
 {% block body %}
 
+	{# articlesBDD : variable TWIG contenant tout les articles selectionnés en BDD et transmit par le controlleur 'BlogController' via la méthode render(), cela nous permet de traiter les données de la BDD avec le langage TWIG afin d'avoir un affichage sur le navigateur #}
 
-<div>
-    <h1>Hello sur le site rockNtro{{ controller_name }}! ✅</h1>
+	{# {{ dump(articleBDD) }} #}
 
-</div>
+	<div class="row mb-2">
+		{# boucle FOR Twig : #}
+		{# arguments : #}
+		{# 1. oneArticle : variable de reception que nous définissons dans la boucle, qui receptionne les données d'1 article par tour de boucle FOR #}
+		{# 2. articlesBDD : variable Twig contenant l'ensemble des données selectionné en BDD #}
+
+			{% for oneMorceau in morceauBDD %}
+
+			{#	{{ dump(oneArticle) }} #}
+
+				<div class="col-md-6"> <div class="row g-0 border rounded overflow-hidden flex-column mb-4 shadow-sm h-md-250 position-relative">
+
+
+					<div >
+						<iframe class="col-md-10"
+                         src={{oneMorceau.lienSpotify}}
+                         width="100%" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+                    <div class="mb-1 text-muted">Posté le
+							{{ oneMorceau.date|date('d/m/Y') }}
+							à
+							{{ oneMorceau.date|date('H:i:s') }}</div>
+                    <div>
+                    <form method="post">
+                    
+                    <button class="bi bi-hand-thumbs-up"></button>>
+                    </form>
+
+
+                    <button class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i></button>
+                    <span>  Nombre de likes </span>
+                    </div>
+
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+
+
+
+
 {% endblock %}
