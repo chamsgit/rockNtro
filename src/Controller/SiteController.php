@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Boutton;
 use App\Entity\Proposition;
 use App\Form\PropositionType;
 use App\Repository\MorceauRepository;
+use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +25,7 @@ class SiteController extends AbstractController
         // getRepository() : méthode permettant d'importer la classe Repository d'une entité
 
         // $reproArticles = $this->getDoctrine()->getRepository(Article::class);
+
         dump($reproMorceaux);
 
         $morceaux = $reproMorceaux->findAll();
@@ -54,11 +58,10 @@ class SiteController extends AbstractController
            'controller_name' => 'SiteController',
            'title' => 'Bienvenue',
            'formProposition' => $formProposition->createView()
-       ]);;
+       ]);
+
    }
 
-
-
-
+  
 
 }
