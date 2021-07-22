@@ -2,6 +2,7 @@
 
 {% block title %} proposition {% endblock %}
 
+
 {% block body %}
     <h1>Votre proposition</h1>
 
@@ -11,11 +12,14 @@
         {{ form_row(formProposition.lien_spotify) }}
 
         <button type="submit" class="btn btn-dark">Envoyer</button>
-    {{ form_end(formProposition) }} 
 
+        
+ {#    {{ form_end(formProposition) }} 
 
+{% for oneProposition in propositionsBDD %}
 
-
+     date() : filtre TWIG qui permet de formater une date / heure
+ <div class="mb-1 text-muted"><small>Posté le {{ formProposition.date|date('d/m/Y') }} à {{ formProposition.date|date('H:i:s') }}</small></div> #}
 
 
 

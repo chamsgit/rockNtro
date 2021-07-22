@@ -33,13 +33,13 @@ class Proposition
     private $lien_spotify;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="propositions")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
