@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Vote;
 use App\Entity\Boutton;
 use App\Entity\Morceau;
 use App\Entity\Proposition;
 use App\Form\PropositionType;
+use App\Repository\UserRepository;
 use App\Repository\MorceauRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,17 +21,46 @@ class SiteController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function morceau(MorceauRepository $reproMorceaux, Request $request): Response
+
+    public function morceau(MorceauRepository $reproMorceaux, Request $request, UserRepository $repoUser, EntityManagerInterface $manager): Response
+
     {
         // Pour selectionner des données dans une table SQL en BDD? nous devons importer la classe Repository qui correspond à la table SQL, c'est à dire à l'entité correspondante (Morceau)
         // Une classe Repository permet uniquement de formuler et d'executer des requetes SQL de selection (SELECT)
         // Cette classe contient des méthodes mis à disposition par Symfony pour formuler et executer des requetes SQL en BDD
         // getRepository() : méthode permettant d'importer la classe Repository d'une entité
+        dump($request);
+
+        // renvoi l'entité complète de l'utilisateur connecté
+      
+        if($request->request->count() > 0)
+        {
+            // permet de récupérer le morceau liké, l'entité complète
+            //$morceau = $reproMorceaux->find($request->request->get('idMorceau'));
+            
+            $mor = $reproMorceaux->find($request->request->get('idMorceau'));
+            dump($mor);
+            //$vote->setUserId($user);  
+            $user = $this->getUser();
+            dump($user);
+
+            $vote = new Vote();
+
+            $vote->setMorceauId($mor);
+            $vote->setUserId($user);
+
+            $manager->persist($vote);
+            $manager->flush();
+        }
+
+
+        
 
         // $reproMorceaus = $this->getDoctrine()->getRepository(Morceau::class);
 
         dump($request);
         // dump($reproMorceaux);
+
 
         $morceaux = $reproMorceaux->findAll();
         // dump($morceaux);
