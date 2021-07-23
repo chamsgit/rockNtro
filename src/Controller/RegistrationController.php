@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        dump($request);
+        // dump($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
 
             $hash = $encoder->hashPassword($user, $user->getPassword());
 
-             dump($hash);
+            //  dump($hash);
 
             // UserPasswordHasherInterface : interface permettant d'encoder le mot de passe
 

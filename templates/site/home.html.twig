@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!
+{% block title %}Home
 {% endblock %}
 
 {% block body %}
@@ -19,7 +19,7 @@
 
 			{#	{{ dump(oneArticle) }} #}
 
-				<div class="col-md-12 d-flex align-items-center"> <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+				<div class="col-md-12 d-flex justify-content-center"> <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 
 					<div class="col-md-7 p-4 d-flex flex-column position-static">
 
@@ -34,13 +34,13 @@
 							à
 							{{ oneMorceau.date|date('H:i:s') }}</div>
 						<form method="post">
-							<button type="button" class="btn btn-danger col-md-5" name="button">
+							<button type="submit" class="btn btn-danger col-md-5" name="boutton" value="1">
 								<i class="bi bi-hand-thumbs-up"></i>
 
 							</button>
 						</form>
 						
-						<a href="#" class="stretched-link">Lire la suite</a>
+						<a href="#" class="">Lire la suite</a>
 
 					</div>
 					<div class="col-md-12 d-none d-lg-block">

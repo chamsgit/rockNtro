@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} proposition {% endblock %}
+{% block title %} Proposition {% endblock %}
 
 
 {% block body %}
@@ -10,14 +10,14 @@
         {{ form_row(formProposition.titre) }}
         {{ form_row(formProposition.artiste) }}
         {{ form_row(formProposition.lien_spotify) }}
-        {{formProposition|date('d/m/Y')}}
+        {# {{formProposition|date('d/m/Y')}} #}
 
         <button type="submit" class="btn btn-dark">Envoyer</button>
 
         
- {#    {{ form_end(formProposition) }} 
+     {{ form_end(formProposition) }} 
 
-{% for oneProposition in propositionsBDD %}
+{#{% for oneProposition in propositionsBDD %}
 
      date() : filtre TWIG qui permet de formater une date / heure
  <div class="mb-1 text-muted"><small>Posté le {{ formProposition.date|date('d/m/Y') }} à {{ formProposition.date|date('H:i:s') }}</small></div> #}
