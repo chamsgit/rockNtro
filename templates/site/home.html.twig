@@ -1,52 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!
+{% block title %}RockNtro!
 {% endblock %}
 
 {% block body %}
 
-	{# articlesBDD : variable TWIG contenant tout les articles selectionnés en BDD et transmit par le controlleur 'BlogController' via la méthode render(), cela nous permet de traiter les données de la BDD avec le langage TWIG afin d'avoir un affichage sur le navigateur #}
+	{# morceauBDD : variable TWIG contenant tout les morceaux selectionnés en BDD et transmit par le controlleur 'BlogController' via la méthode render(), cela nous permet de traiter les données de la BDD avec le langage TWIG afin d'avoir un affichage sur le navigateur #}
 
-	{# {{ dump(articleBDD) }} #}
+	{# {{ dump(morceauBDD) }} #}
 
-		<div class="row mb-2" > {# boucle FOR Twig : #}
+		<div class="row mb-2" > 
 
 		{# arguments : #}
-		{# 1. oneArticle : variable de reception que nous définissons dans la boucle, qui receptionne les données d'1 article par tour de boucle FOR #}
-		{# 2. articlesBDD : variable Twig contenant l'ensemble des données selectionné en BDD #}
+		{# 1. onemorceau : variable de reception que nous définissons dans la boucle, qui receptionne les données d'1 morceau par tour de boucle FOR #}
+		{# 2. morceauBDD : variable Twig contenant l'ensemble des données selectionné en BDD #}
 
-			{% for oneMorceau in morceauBDD %}
+			{% for oneMorceau in morceauBDD %}{# boucle FOR Twig : #}
 
-			{#	{{ dump(oneArticle) }} #}
+			{#	{{ dump(onemorceau) }} #}
 
-				<div class="col-md-12 d-flex align-items-center"> <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3">
+				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg ">
 
-					<div class="col-md-7 p-4 d-flex flex-column position-static">
+					<div class="col-md-9 p-4 d-flex position-static justify-content-lg-between ">
 
-						<strong class="d-inline-block mb-2 text-primary">{{ oneMorceau.titre }}</strong>
+						<strong class="d-inline-block mb-2 text-primary"> Titre: {{ oneMorceau.titre }} </strong>
 
 						{# on picohe dans un objet twig #}
-						<h3 class="mb-0">{{ oneMorceau.artiste }}</h3>
+						<h5 class="mb-0"><span >artiste:</span>{{ oneMorceau.artiste }}</h5>
 						{# date() : filtre TWIG qui permet de formater une date / heure #}
 
-						<div class="mb-1 text-muted">Posté le
+						
+						<form method="post">
+							<button type="button" class="btn-sm btn-danger d-flex text-center" name="button" >
+								<i class="bi bi-hand-thumbs-up me-1 " ></i>  <h5>25</h5> 
+                              
+							</button>
+						</form>
+
+						
+						
+						{# <a href="{{ path('morceau', {'id': oneMorceau.id}) }}" class="link">afficher le morceau</a> #}
+
+					</div>
+					<div class="col-md-12 ">
+						<iframe src="{{ oneMorceau.lienspotify }}" width="80%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+					</div>
+
+					<div class="m-2 align-content-end text-muted">Posté le
 							{{ oneMorceau.date|date('d/m/Y') }}
 							à
 							{{ oneMorceau.date|date('H:i:s') }}</div>
-						<form method="post">
-							<button type="button" class="btn btn-danger col-md-5" name="button">
-								<i class="bi bi-hand-thumbs-up"></i>
-
-							</button>
-						</form>
-						
-						<a href="#" class="stretched-link">Lire la suite</a>
-
-					</div>
-					<div class="col-md-12 d-none d-lg-block">
-						<iframe src="{{ oneMorceau.lienspotify }}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-					</div>
 
 				</div>
 			</div>
