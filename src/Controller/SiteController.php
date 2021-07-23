@@ -19,7 +19,7 @@ class SiteController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function morceau(MorceauRepository $reproMorceaux): Response
+    public function morceau(MorceauRepository $reproMorceaux, Request $request): Response
     {
         // Pour selectionner des données dans une table SQL en BDD? nous devons importer la classe Repository qui correspond à la table SQL, c'est à dire à l'entité correspondante (Morceau)
         // Une classe Repository permet uniquement de formuler et d'executer des requetes SQL de selection (SELECT)
@@ -28,10 +28,11 @@ class SiteController extends AbstractController
 
         // $reproMorceaus = $this->getDoctrine()->getRepository(Morceau::class);
 
-        dump($reproMorceaux);
+        dump($request);
+        // dump($reproMorceaux);
 
         $morceaux = $reproMorceaux->findAll();
-        dump($morceaux);
+        // dump($morceaux);
 
         return $this->render('site/home.html.twig', [
 
@@ -78,7 +79,7 @@ class SiteController extends AbstractController
            'formProposition' => $formProposition->createView()       
 
        ]);;
-       dump($proposition);
+    //    dump($proposition);
    }
 
 
