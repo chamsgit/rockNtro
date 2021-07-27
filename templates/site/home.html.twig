@@ -34,33 +34,28 @@
 						<h3 class="mb-0">{{ oneMorceau.artiste }}</h3>
 						{# date() : filtre TWIG qui permet de formater une date / heure #}
 
-						<div class="mb-1 text-muted">Posté le
-							{{ oneMorceau.date|date('d/m/Y') }}
-							à
-							{{ oneMorceau.date|date('H:i:s') }}</div>
+						
 
 						{% if app.user %}
 
 							<form method="post">
 							<input type="hidden" name="idMorceau" id="idMorceau" value="{{ oneMorceau.id }}">
-							<button type="submit" class="btn btn-danger col-md-5" name="button" value="like">
-								<i class="bi bi-hand-thumbs-up"></i>
+							<button type="submit" class="btn-sm btn-danger d-flex text-center" name="button" value="like">
+								<i class="bi bi-hand-thumbs-up"></i>   <h5>25</h5>
 
 
-							<button type="button" class="btn-sm btn-danger d-flex text-center" name="button" >
-								<i class="bi bi-hand-thumbs-up me-1 " ></i>  <h5>25</h5> 
                               
 							</button>
 
 						</form>
 
 						{% else %}
+							<a href="{{ path('app_login') }}">
+								<button class="btn btn-primary" name="button" value="like" >
+								 	Identifiez-vous pour liker
 
-							<button class="btn btn-primary" name="button" value="like">
-								Identifiez-vous pour liker
-
-							</button>
-
+								</button>
+							</a> 
 						{% endif %}
 							
 						
