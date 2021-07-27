@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    RockNtro
+{% endblock %}
+    
+{% block body %}
+
+    <h1 class="display-4 fst-italic text-center my-4">Dernière proposition</h1>
+		<div class="row mb-2" > 
+
+		
+
+			{% for oneProposition in propositionBDD %}{# boucle FOR Twig : #}
+
+			{#	{{ dump(onemorceau) }} #}
+
+
+				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3">
+				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg ">
+
+
+					<div class="col-md-9 p-4 d-flex position-static justify-content-lg-between ">
+
+						<strong class="d-inline-block mb-2 text-primary"> Titre: {{ oneProposition.titre }} </strong>
+
+
+						{# on piioche dans un objet twig #}
+						<h3 class="mb-0">{{ oneProposition.artiste }}</h3>
+						{# date() : filtre TWIG qui permet de formater une date / heure #}
+
+						
+						<a href="#" class="">Lire la suite</a>
+
+
+					</div>
+					<div class="col-md-12 ">
+						<iframe src="{{ oneProposition.lienspotify }}" width="80%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+					</div>
+
+					<div class="m-2 align-content-end text-muted">Posté le
+							{{ oneProposition.date|date('d/m/Y') }}
+							à
+							{{ oneProposition.date|date('H:i:s') }}</div>
+
+				</div>
+			</div>
+		{% endfor %}
+	  </div>
+
+{% endblock %}
+
+
+
+

@@ -3,12 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Vote;
-use App\Entity\Boutton;
-use App\Entity\Morceau;
 use App\Entity\Proposition;
 use App\Form\PropositionType;
 use App\Repository\UserRepository;
 use App\Repository\MorceauRepository;
+use App\Repository\PropositionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -182,6 +181,22 @@ class SiteController extends AbstractController
 //         ]);
 //     }
 
+/**
+ * @Route("/entrer", name="entrer")
+ */
+    public function nouveaute(PropositionRepository $repoProposition, Request $request, EntityManagerInterface $manager): Response
+
+    {
+        $propositions = $repoProposition -> findAll();
+        // dump($propositions);
+       
+
+        return $this->render('site/nouveaute.html.twig', [
+            'propositionBDD' => $propositions
+            
+ 
+        ]);
+    }
    }
 
 
