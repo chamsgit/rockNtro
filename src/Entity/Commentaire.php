@@ -27,16 +27,18 @@ class Commentaire
      */
     private $date;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=morceau::class)
-     */
-    private $morceau_id;
+    
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class)
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $user_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Morceau::class, inversedBy="commentaires")
+     */
+    private $lemorceau;
 
     public function getId(): ?int
     {
@@ -67,18 +69,6 @@ class Commentaire
         return $this;
     }
 
-    public function getMorceauId(): ?morceau
-    {
-        return $this->morceau_id;
-    }
-
-    public function setMorceauId(?morceau $morceau_id): self
-    {
-        $this->morceau_id = $morceau_id;
-
-        return $this;
-    }
-
     public function getUserId(): ?user
     {
         return $this->user_id;
@@ -87,6 +77,18 @@ class Commentaire
     public function setUserId(?user $user_id): self
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getLemorceau(): ?Morceau
+    {
+        return $this->lemorceau;
+    }
+
+    public function setLemorceau(?Morceau $lemorceau): self
+    {
+        $this->lemorceau = $lemorceau;
 
         return $this;
     }
