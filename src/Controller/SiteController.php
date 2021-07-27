@@ -49,7 +49,7 @@ class SiteController extends AbstractController
 
             $vote = new Vote();
 
-            $vote->setMorceauId($mor);
+            $vote->setLemorceau($mor);
             $vote->setUserId($user);
 
             $manager->persist($vote);
@@ -132,7 +132,7 @@ class SiteController extends AbstractController
           if($formCommentaire->isSubmitted()&& $formCommentaire->isValid())
             {
                 $commentaire->setDate(new \dateTime());
-               $commentaire->setMorceauId($morceau);
+                $commentaire->setLemorceau($morceau);
 
                 $manager->persist($commentaire);
                 $manager ->flush();
