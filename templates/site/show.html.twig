@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Site | Détails article
+{% endblock %}
+
+{% block body %}
+
+    
+    
+    <h1 class="display-4 fst-italic text-center my-4">Détails de l'article</h1> 
+
+    <div>
+
+            <div class="col-md-12 ">
+			    <iframe src="{{ morceauBDD.lienspotify }}" width="80%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+			</div>
+
+			<div class="m-2 align-content-end text-muted">Posté le
+					{{ morceauBDD.date|date('d/m/Y') }}
+					à
+					{{ morceauBDD.date|date('H:i:s') }}
+            </div>
+
+
+          <h4 class="mt-5 mb-2"> Donner votre Avis...</h4>
+               
+            {{form_row(formCommentaire.commentaire)}}
+
+                    <button type="submit" class="btn btn-dark mt-2"> envoyer</button>
+                 {{form_end(formCommentaire)}}
+        
+           
+          <h4 class="mt-5 mb-2">Vos reactions...</h4>
+
+                {% if commentaireBDD.commentaire is not empty %} 
+            
+                    <div class="row">
+                        <div class ="row shadow rounded mx-0 px-0 mb-2">
+                            {% for oneCommentaire in commentaireBDD %}
+
+                             {{dump(oneCommentaire)}}
+
+                            
+                                    <div class=" col-md-4 py-2">
+                                        <strong>{{ oneCommentaire.pseudo }}</strong>
+                                        <small class = "fst-italic">posté le {{ oneComment.date|date('d/m/Y à H:i:s')}} </small>
+                                    </div>
+                                    <div class="col-md-8 py-2">
+                                        {{ oneCommentaire.commentaire | raw}}
+                                    </div>
+                        </div>
+
+                    {% endfor %} 
+                     </div>
+
+            {% else %} 
+                <p class="fst-italic text-center"> soyer prems à donner votre avis.</p>
+
+            {% endif %} 
+
+
+
+
+    </div>
+   
+
+{% endblock %}

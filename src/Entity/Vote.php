@@ -17,34 +17,23 @@ class Vote
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=morceau::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $morceau_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class)
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $user_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Morceau::class, inversedBy="votes")
+     */
+    private $lemorceau;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMorceauId(): ?morceau
-    {
-        return $this->morceau_id;
-    }
-
-    public function setMorceauId(?morceau $morceau_id): self
-    {
-        $this->morceau_id = $morceau_id;
-
-        return $this;
-    }
 
     public function getUserId(): ?user
     {
@@ -54,6 +43,18 @@ class Vote
     public function setUserId(?user $user_id): self
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getLemorceau(): ?Morceau
+    {
+        return $this->lemorceau;
+    }
+
+    public function setLemorceau(?Morceau $lemorceau): self
+    {
+        $this->lemorceau = $lemorceau;
 
         return $this;
     }

@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Vote;
+use App\Entity\Morceau;
+use App\Entity\Commentaire;
 use App\Entity\Proposition;
+use App\Form\CommentaireType;
 use App\Form\PropositionType;
+use App\Repository\CommentaireRepository;
 use App\Repository\UserRepository;
 use App\Repository\MorceauRepository;
 use App\Repository\PropositionRepository;
@@ -90,96 +94,69 @@ class SiteController extends AbstractController
         $formProposition->handleRequest($request);
 
         //si le formulaire est soumis
-        if($formProposition->isSubmitted()){
+        if($formProposition->isSubmitted())
+        {
 
                 // on enregistre en BDD
             $em= $this->getDoctrine()->getManager();//($em pour entity manager), ($this pour reccuper les methodes du controleur)
             $em->persist($proposition);
             $em->flush();
-
-            // return new Response("Proposition envoyé et en attente de validation");
-
         }
-
-
 
        return $this->render('site/proposition.html.twig', [
            'controller_name' => 'SiteController',
            'title' => 'Bienvenue',
            'formProposition' => $formProposition->createView()       
 
-       ]);;
-    //    dump($proposition);
+       ]);
+  
    }
 
+// ----*** importation d'un morceau par son id  et affichage dans la page "morceau"
 
+    /**
+     * Méthode permettant d'afficher le détail d'un article
+     * 
+     * @Route("/home/{id}", name="home_show")
+     */
 
-//    public function unMorceau(Morceau $Morceau, Request $request, EntityManagerInterface $manager): Response
-//     {
-//         // L'id transmit dans l'URL est envoyé directement en argument de la fonction unMorceau(), ce qui nous permet d'avoir accès à l'id de l'Morceau a selectionner en BDD au sein de la méthode unMorceau()
-//         // dump($id); // 6
+    public function show(Morceau $morceau, CommentaireRepository $commentaire ,Request $request, EntityManagerInterface $manager): Response
+    {
+   //TRAITEMENT COMMENTAIRE ARTICLE
+    $commentaire = new Commentaire;
+     $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
 
-//         // Importation de la classe MorceauRepository
-//         // $repoMorceau = $this->getDoctrine()->getRepository(Morceau::class);
-//         // dump($repoMorceau);
+    $formCommentaire->handleRequest($request);
+        
+        
+          if($formCommentaire->isSubmitted()&& $formCommentaire->isValid())
+            {
+                $commentaire->setDate(new \dateTime());
+               $commentaire->setMorceauId($morceau);
 
-//         // find() : méthode mise à dispostion par Symfony issue de la classe MorceauRepository permettant de selectionner un élément de la BDD par son ID 
-//         // $Morceau : tableau ARRAY contenant toutes les données de l'Morceau selectionné en BDD en fonction de l'ID transmit dans l'URL 
+                $manager->persist($commentaire);
+                $manager ->flush();
 
-//         // SELECT * FROM Morceau WHERE id = 6 + FETCH 
-//         // $Morceau = $repoMorceau->find($id); // 6
-//         dump($request->server->get('DOCUMENT_ROOT'));
+                //message  addFlash appelé 'sucess' de validation du commentaire, stocké dans la 'session' utilisateur
+                $this->addFlash('success',"Votre commentaire posté avec succés ! bravo ");
 
-//         // TRAITEMENT COMMENTAIRE Morceau (formulaire + insertion)
-//         $comment = new Comment; 
+               // dump($commentaire);
 
-//         $formComment = $this->createForm(CommentType::class, $comment, [
-//             'commentFront' => true
-//         ]); 
+                return $this->redirectToRoute('home_show', [
+                    'id' => $morceau->getId()
+                ]);
+            }
+       
 
-//         $formComment->handleRequest($request); // $comment->setAuteur('$_POST[auteur]') | $comment->setCommentaire('$_POST[commentaire]')
+       //----**** affichage du morceau dans la page show *****---------
+        
+        return $this ->render('site/show.html.twig', [
+            'morceauBDD'=>$morceau,
+            'formCommentaire' => $formCommentaire->createView(),
+           'commentaireBDD'=> $commentaire,
+        ]);
+    }
 
-//         if($formComment->isSubmitted() && $formComment->isValid())
-//         {
-//             $comment->setDate(new \DateTime());
-//             $comment->setAuteur($this->getUser()->getPrenom() . ' ' . $this->getUser()->getNom());
-
-//             // On établit la realtion entre le commentaire et l'Morceau (clé étrangère)
-//             // setMorceau() : méthode issue de l'entité Comment qui permet de rensigner l'Morceau associé au commentaire
-//             // Cette méthode attends en argument l'objet entité Morceau de la BDD et non la clé étrangère elle même
-//             $comment->setMorceau($Morceau);
-
-//             $manager->persist($comment);
-//             $manager->flush();
-
-//             // addFlash() : méthode permettant de déclarer un message de validation stocké en session
-//             // arguements :
-//             // 1. Identifiant du message (success)
-//             // 2. Le message utilisateur
-//             $this->addFlash('notice', "Le commentaire a été posté avec succès !");
-
-//             /*
-//                 session
-//                 array(
-//                     success => [
-//                         0 => "Le commentaire a été posté avec succès !"
-//                     ]
-//                 )
-//             */
-
-//             dump($comment);
-
-//             // Après l'insertion, on redirige l'internaute vers l'affichage de l'Morceau afin de rebooter le formulaire
-//             return $this->redirectToRoute('blog_unMorceau', [
-//                 'id' => $Morceau->getId()
-//             ]);
-//         }
-
-//         return $this->render('blog/unMorceau.html.twig', [
-//             'MorceauBDD' => $Morceau, // on transmet au template les données de l'Morceau selectionné en BDD afin de les traiter avec le langage Twig dans le template
-//             'formComment' => $formComment->createView()
-//         ]);
-//     }
 
 /**
  * @Route("/entrer", name="entrer")
@@ -198,5 +175,6 @@ class SiteController extends AbstractController
         ]);
     }
    }
+
 
 
