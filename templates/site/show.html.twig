@@ -24,9 +24,9 @@
             </div>
 
 
-          <h4 class="mt-5 mb-2"> Donner votre Avis...</h4>
-               
-            {{form_row(formCommentaire.commentaire)}}
+             <h4 class="mt-5 mb-2"> Donner votre Avis...</h4>
+                {{ form_start(formCommentaire)}}  
+                    {{form_row(formCommentaire.commentaire)}}
 
                     <button type="submit" class="btn btn-dark mt-2"> envoyer</button>
                  {{form_end(formCommentaire)}}
@@ -44,7 +44,7 @@
 
                             
                                     <div class=" col-md-4 py-2">
-                                        <strong>{{ oneCommentaire.pseudo }}</strong>
+                                     {#   <strong>{{ oneCommentaire.pseudo }}</strong> #}
                                         <small class = "fst-italic">posté le {{ oneComment.date|date('d/m/Y à H:i:s')}} </small>
                                     </div>
                                     <div class="col-md-8 py-2">

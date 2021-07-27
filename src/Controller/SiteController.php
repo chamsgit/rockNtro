@@ -49,7 +49,7 @@ class SiteController extends AbstractController
 
             $vote = new Vote();
 
-            $vote->setMorceauId($mor);
+            $vote->setLemorceau($mor);
             $vote->setUserId($user);
 
             $manager->persist($vote);
@@ -123,7 +123,7 @@ class SiteController extends AbstractController
     public function show(Morceau $morceau, CommentaireRepository $commentaire ,Request $request, EntityManagerInterface $manager): Response
     {
    //TRAITEMENT COMMENTAIRE ARTICLE
-    $commentaire = new Commentaire;
+     $commentaire = new Commentaire;
      $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
 
     $formCommentaire->handleRequest($request);
@@ -131,8 +131,8 @@ class SiteController extends AbstractController
         
           if($formCommentaire->isSubmitted()&& $formCommentaire->isValid())
             {
-                $commentaire->setDate(new \dateTime());
-               $commentaire->setMorceauId($morceau);
+               $commentaire->setDate(new \dateTime());
+               $commentaire->setLemorceau($morceau);
 
                 $manager->persist($commentaire);
                 $manager ->flush();
@@ -153,7 +153,7 @@ class SiteController extends AbstractController
         return $this ->render('site/show.html.twig', [
             'morceauBDD'=>$morceau,
             'formCommentaire' => $formCommentaire->createView(),
-           'commentaireBDD'=> $commentaire,
+            'commentaireBDD'=> $commentaire,
         ]);
     }
 
