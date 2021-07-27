@@ -27,9 +27,6 @@ class Commentaire
      */
     private $date;
 
-    
-
-    
 
     /**
      * @ORM\ManyToOne(targetEntity=Morceau::class, inversedBy="commentaires")
@@ -70,8 +67,6 @@ class Commentaire
 
         return $this;
     }
-
-    
 
     public function getLemorceau(): ?Morceau
     {
