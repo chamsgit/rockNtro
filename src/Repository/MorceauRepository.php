@@ -19,6 +19,12 @@ class MorceauRepository extends ServiceEntityRepository
         parent::__construct($registry, Morceau::class);
     }
 
+    // public function findAll()
+    // {
+    //     return $this->findBy(array('votes' => 'ASC'));
+    // }
+
+
     // /**
     //  * @return Morceau[] Returns an array of Morceau objects
     //  */

@@ -9,6 +9,7 @@
 	{# morceauBDD : variable TWIG contenant tout les morceaux selectionnés en BDD et transmit par le controlleur 'BlogController' via la méthode render(), cela nous permet de traiter les données de la BDD avec le langage TWIG afin d'avoir un affichage sur le navigateur #}
 
 	{# {{ dump(morceauBDD) }} #}
+	{# {{ dump(votes) }} #}
 
 		<div class="row mb-2" > 
 
@@ -16,7 +17,9 @@
 		{# 1. onemorceau : variable de reception que nous définissons dans la boucle, qui receptionne les données d'1 morceau par tour de boucle FOR #}
 		{# 2. morceauBDD : variable Twig contenant l'ensemble des données selectionné en BDD #}
 
-			{% for oneMorceau in morceauBDD %}{# boucle FOR Twig : #}
+			{% for oneMorceau in morceauBDD |sort votes asc %}{# boucle FOR Twig : #}
+			{# {% for oneMorceau in morceauBDD |sort (oneMorceau.votes order by ASC and LIMIT 50) %} #}
+			  
 
 			{#	{{ dump(onemorceau) }} #}
 
@@ -41,13 +44,12 @@
 							<form method="post">
 							<input type="hidden" name="idMorceau" id="idMorceau" value="{{ oneMorceau.id }}">
 							<button type="submit" class="btn-sm btn-danger d-flex text-center" name="button" value="like">
-								<i class="bi bi-hand-thumbs-up"></i>   <h5>25</h5>
-
-
+								<i class="bi bi-hand-thumbs-up" ></i> <h5>{{ oneMorceau.votes|length }}</h5>  
                               
 							</button>
 
 						</form>
+
 
 						{% else %}
 							<a href="{{ path('app_login') }}">
@@ -60,7 +62,7 @@
 							
 						
 						
-						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="stretched-link">Commentaires</a>
+						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link">Commentaires</a>
 
 
 					</div>
