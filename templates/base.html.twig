@@ -34,7 +34,7 @@
                 </div>
                     <div class="col-4 text-center">
                         <a class="blog-header-logo text-dark fst-italic" href="{{ path('home') }}"><img src="{{ asset('assets/logo_small.png') }}" alt=""></a>
-                        <p class="lead my-3"><strong>Ici vous trouverez le meilleur Top 50 des intros</strong></p>
+                        <p class="lead my-3"><strong>LE SITE DE LA DREAM TEAM</strong></p>
                 </div>
                 
                 <div class="col-4 d-flex justify-content-end align-items-center">
@@ -61,29 +61,27 @@
             <div class="nav-scroller py-1 mb-2">
                 <nav class="nav d-flex justify-content-evenly">
                 <a class="p-1 link-secondary" href="{{ path('home') }}"><i class="bi bi-house-door-fill"></i></a>
+
+                <a class="p-2 link-secondary" href="{{ path('entrer') }}">Nouveaute</a>
+
+                {% if app.user %}
+
                 <a class="p-1 link-secondary" href="{{ path('proposition')}}">Proprosition</a>
-                <a class="p-2 link-secondary" href="{{ path('app_login') }}">Connexion</a>
 
-                {# path() : fonction TWIG permettant de générer une route, une adresse en fonction de son nom définit dans le controlleur, on lui transmet en argument le nom de la route (@Route("", name="blog")) #}
-                 <a class="p-2 link-secondary" href="{{ path('entrer') }}">Nouveaute</a>
-                {#<a class="p-2 link-secondary" href="#">Culture</a>
+                {% else %}
 
-                <a class="p-2 link-secondary" href="#">Business</a>
-                <a class="p-2 link-secondary" href="#">Politics</a>  
-                <a class="p-2 link-secondary" href="#">Travel</a> #}
+							<a href="{{ path('app_login') }}">
+
+							
+							</a> 
+
+						{% endif %}
+
+                 
+               
                 </nav>
             </div>
             
-
-            <div class="p-4 p-md-5 mb-4 text-white rounded bandeau-header background-image: url("../img/jumbotron_bg.jpg");
-background-size: cover;}" >
-                <div class="col-md-6 px-0">
-                <h1 class="display-4 fst-italic">RockNtro</h1>
-                <p class="lead my-3">Ici vous trouverez le meilleur Top 50 des intros</p>
-                <p class="lead mb-0"><a href="#" class="text-white fw-bold"></a></p>
-            </div>
-        </div>
-    </div>
 
         <main class="container conteneur-base">
         {% block body %}
