@@ -53,9 +53,12 @@ class SiteController extends AbstractController
 
             $vote->setLemorceau($mor);
             $vote->setUserId($user);
+            
 
             $manager->persist($vote);
             $manager->flush();
+
+            return $this->redirectToRoute('home');
         }
       
 
@@ -70,6 +73,11 @@ class SiteController extends AbstractController
             'controller_name' => 'SiteController',
             
         ]);
+
+         
+           
+
+    
     }
      
 
@@ -113,7 +121,6 @@ class SiteController extends AbstractController
      * 
      * @Route("/home/{id}", name="home_show")
      */
-
     public function show(Morceau $morceau,CommentaireRepository $commentaire ,Request $request, EntityManagerInterface $manager): Response
     {
    //TRAITEMENT COMMENTAIRE ARTICLE
