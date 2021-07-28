@@ -17,57 +17,65 @@
 		{# 1. onemorceau : variable de reception que nous définissons dans la boucle, qui receptionne les données d'1 morceau par tour de boucle FOR #}
 		{# 2. morceauBDD : variable Twig contenant l'ensemble des données selectionné en BDD #}
 
-			{% for oneMorceau in morceauBDD |sort votes asc %}{# boucle FOR Twig : #}
+             {% for oneMorceau in morceauBDD %}
+			{# {% for oneMorceau in morceauBDD |sort (morceau.votes) |reverse (false)%}boucle FOR Twig : #}
 			{# {% for oneMorceau in morceauBDD |sort (oneMorceau.votes order by ASC and LIMIT 50) %} #}
 			  
 
-			{#	{{ dump(onemorceau) }} #}
+				{# {{ dump(oneMorceau) }} #}
 
 
-				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3">
-				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg ">
+				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3 ">
+				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75">
 
 
-					<div class="col-md-9 p-4 d-flex position-static justify-content-lg-between ">
+					<div class="col-md-9 p-4 d-flex position-static justify-content-around">
 
-						<strong class="d-inline-block mb-2 text-primary"> Titre: {{ oneMorceau.titre }} </strong>
+						<strong class="d-inline-block mb-2"> <span class="text-primary"> Titre: </span>{{ oneMorceau.titre }} </strong>
 
 
 						{# on piioche dans un objet twig #}
-						<h3 class="mb-0">{{ oneMorceau.artiste }}</h3>
-						{# date() : filtre TWIG qui permet de formater une date / heure #}
+						<h5 class="mb-1"><span class="text-primary"> Artiste: </span> {{ oneMorceau.artiste }}</h5>
 
-						
 
 						{% if app.user %}
 
 							<form method="post">
 							<input type="hidden" name="idMorceau" id="idMorceau" value="{{ oneMorceau.id }}">
-							<button type="submit" class="btn-sm btn-danger d-flex text-center" name="button" value="like">
-								<i class="bi bi-hand-thumbs-up" ></i> <h5>{{ oneMorceau.votes|length }}</h5>  
-                              
-							</button>
-
-						</form>
+							</form>
 
 
 						{% else %}
-							<a href="{{ path('app_login') }}">
+							{# <a href="{{ path('app_login') }}">
 								<button class="btn btn-primary" name="button" value="like" >
 								 	Identifiez-vous pour liker
 
 								</button>
-							</a> 
+							</a>  #}
 						{% endif %}
 							
-						
+						{% if app.user %}
 						
 						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link">Commentaires</a>
+						
+						{% else %}
+							{# <a href="{{ path('app_login') }}">
+								<button class="btn btn-link btn-outline-danger" name="button" value="like" >
+								 	Identifiez-vous pour acceder aux commentaires #}
+						{% endif %}
+
+			
 
 
 					</div>
-					<div class="col-md-12 ">
-						<iframe src="{{ oneMorceau.lienspotify }}" width="80%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+					
+					<div class="col-md-12 d-flex ml-6">
+						<iframe src="{{ oneMorceau.lienspotify }}" width="90%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+						<button type="submit" class="btn btn-danger d-flex " name="button" value="like">
+								<i class="bi bi-hand-thumbs-up" ></i> <h5>{{ oneMorceau.votes|length }}</h5>  
+                              
+					    </button>
 
 					</div>
 

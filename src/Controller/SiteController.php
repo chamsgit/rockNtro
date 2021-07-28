@@ -2,18 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Vote;
 use App\Entity\Morceau;
 use App\Entity\Commentaire;
 use App\Entity\Proposition;
 use App\Form\CommentaireType;
 use App\Form\PropositionType;
-use App\Repository\CommentaireRepository;
 use App\Repository\UserRepository;
 use App\Repository\MorceauRepository;
 use App\Repository\PropositionRepository;
 use App\Repository\VoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CommentaireRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,8 +40,8 @@ class SiteController extends AbstractController
       
         if($request->request->count() > 0)
         {
-            // permet de récupérer le morceau liké, l'entité complète
-            //$morceau = $reproMorceaux->find($request->request->get('idMorceau'));
+ // --------- traitement du LIKE permet de récupérer le morceau liké,
+            
             
             $mor = $reproMorceaux->find($request->request->get('idMorceau'));
             dump($mor);
@@ -84,16 +85,21 @@ class SiteController extends AbstractController
 
             'morceauBDD' => $morceaux,
             // 'votes' => $votes,
-
-
             'controller_name' => 'SiteController',
-            'title' => 'Bienvenue',
+
+            
+                // 'controller_name' => 'SiteController',
 
         ]);
+
+         
+           
+
+    
     }
      
 
-
+//-----------***** traitement des propositions  --------------------
 
 
    /**
@@ -111,7 +117,7 @@ class SiteController extends AbstractController
         if($formProposition->isSubmitted())
         {
 
-                // on enregistre en BDD
+         // on enregistre en BDD
             $em= $this->getDoctrine()->getManager();//($em pour entity manager), ($this pour reccuper les methodes du controleur)
             $em->persist($proposition);
             $em->flush();
@@ -133,20 +139,22 @@ class SiteController extends AbstractController
      * 
      * @Route("/home/{id}", name="home_show")
      */
-
-    public function show(Morceau $morceau, CommentaireRepository $commentaire ,Request $request, EntityManagerInterface $manager): Response
+    public function show(Morceau $morceau,CommentaireRepository $commentaire ,Request $request, EntityManagerInterface $manager): Response
     {
    //TRAITEMENT COMMENTAIRE ARTICLE
      $commentaire = new Commentaire;
      $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
-
+     
     $formCommentaire->handleRequest($request);
         
         
           if($formCommentaire->isSubmitted()&& $formCommentaire->isValid())
-            {
+           {
+           
                $commentaire->setDate(new \dateTime());
                $commentaire->setLemorceau($morceau);
+               $commentaire->setUser($this->getUser());
+          
 
                 $manager->persist($commentaire);
                 $manager ->flush();
@@ -157,7 +165,9 @@ class SiteController extends AbstractController
                // dump($commentaire);
 
                 return $this->redirectToRoute('home_show', [
-                    'id' => $morceau->getId()
+                    'id' => $morceau->getId(),
+                   
+
                 ]);
             }
        
@@ -170,6 +180,10 @@ class SiteController extends AbstractController
             'commentaireBDD'=> $commentaire,
         ]);
     }
+
+
+
+        //-----*** recuperation des nouvelles entrées "proposition" et envoi "nouveautés"----------
 
 
 /**

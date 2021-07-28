@@ -11,13 +11,13 @@
 
 		
 
-			{% for oneProposition in propositionBDD %}{# boucle FOR Twig : #}
+			{% for oneProposition in propositionBDD | sort|reverse %}{# boucle FOR Twig : #}
 
 			{#	{{ dump(onemorceau) }} #}
 
 
 				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3">
-				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg ">
+				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75 ">
 
 
 					<div class="col-md-9 p-4 d-flex position-static justify-content-lg-between ">
@@ -27,7 +27,6 @@
 
 						{# on piioche dans un objet twig #}
 						<h3 class="mb-0">{{ oneProposition.artiste }}</h3>
-						{# date() : filtre TWIG qui permet de formater une date / heure #}
 
 						
 						<a href="#" class="">Lire la suite</a>
