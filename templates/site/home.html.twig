@@ -32,22 +32,18 @@
 
 						{# on piioche dans un objet twig #}
 						<h3 class="mb-0">{{ oneMorceau.artiste }}</h3>
-						{# date() : filtre TWIG qui permet de formater une date / heure #}
-
 						
+						<h5>{{ oneMorceau.votes|length }}</h5>
 
 						{% if app.user %}
 
 							<form method="post">
-							<input type="hidden" name="idMorceau" id="idMorceau" value="{{ oneMorceau.id }}">
-							<button type="submit" class="btn-sm btn-danger d-flex text-center" name="button" value="like">
-								<i class="bi bi-hand-thumbs-up"></i>   <h5>25</h5>
+								<input type="hidden" name="idMorceau" id="idMorceau" value="{{ oneMorceau.id }}">
+								<button type="submit" class="btn-sm btn-danger d-flex text-center" name="button" value="like">
+									<i class="bi bi-hand-thumbs-up"></i>   <h5></h5>      
+								</button>
 
-
-                              
-							</button>
-
-						</form>
+							</form>
 
 						{% else %}
 							<a href="{{ path('app_login') }}">
@@ -58,12 +54,21 @@
 							</a> 
 						{% endif %}
 							
+						{% if app.user %}
 						
+						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link">Commentaires</a>
 						
-						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="stretched-link">Commentaires</a>
+						{% else %}
+							<a href="{{ path('app_login') }}">
+								<button class="btn btn-primary" name="button" value="like" >
+								 	Identifiez-vous pour acceder aux commentaires
+						{% endif %}
+
+						
 
 
 					</div>
+					
 					<div class="col-md-12 ">
 						<iframe src="{{ oneMorceau.lienspotify }}" width="80%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
