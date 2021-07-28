@@ -12,8 +12,6 @@
 		
 				{% for oneProposition in propositionBDD | sort|reverse %}{# boucle FOR Twig : #}
 
-			{% for oneProposition in propositionBDD | sort|reverse %}{# boucle FOR Twig : #}
-
 			{#	{{ dump(onemorceau) }} #}
 
 
@@ -30,7 +28,7 @@
 						<h3 class="mb-0">{{ oneProposition.artiste }}</h3>
 
 						
-						<a href="#" class="">Lire la suite</a>
+						<a href="#" class="">Voir plus...</a>
 
 
 					</div>
@@ -47,6 +45,7 @@
 				</div>
 			</div>
 		{% endfor %}
+
 	  </div>
 
 {% endblock %}
