@@ -6,10 +6,11 @@
     
 {% block body %}
 
-    <h1 class="display-4 fst-italic text-center my-4">Dernière proposition</h1>
+    <h3 class="display-7 text-center my-4">Dernières propositions</h3>
 		<div class="row mb-2" > 
 
 		
+				{% for oneProposition in propositionBDD | sort|reverse %}{# boucle FOR Twig : #}
 
 			{% for oneProposition in propositionBDD | sort|reverse %}{# boucle FOR Twig : #}
 
@@ -38,10 +39,10 @@
 
 					</div>
 
-					<div class="m-2 align-content-end text-muted">Posté le
+				{#	<div class="m-2 align-content-end text-muted">Posté le
 							{{ oneProposition.date|date('d/m/Y') }}
 							à
-							{{ oneProposition.date|date('H:i:s') }}</div>
+							{{ oneProposition.date|date('H:i:s') }}</div> #}
 
 				</div>
 			</div>

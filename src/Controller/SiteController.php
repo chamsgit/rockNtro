@@ -10,11 +10,11 @@ use App\Entity\Proposition;
 use App\Form\CommentaireType;
 use App\Form\PropositionType;
 use App\Repository\UserRepository;
-use App\Repository\MorceauRepository;
-use App\Repository\PropositionRepository;
 use App\Repository\VoteRepository;
+use App\Repository\MorceauRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentaireRepository;
+use App\Repository\PropositionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +27,7 @@ class SiteController extends AbstractController
      * @Route("/", name="home")
      */
 
-    public function morceau(MorceauRepository $reproMorceaux, Request $request, UserRepository $repoUser, VoteRepository $allVotes, EntityManagerInterface $manager): Response
+    public function morceau(MorceauRepository $reproMorceaux, Request $request, VoteRepository $repovote,UserRepository $repoUser, EntityManagerInterface $manager): Response
 
     {
         // Pour selectionner des données dans une table SQL en BDD? nous devons importer la classe Repository qui correspond à la table SQL, c'est à dire à l'entité correspondante (Morceau)
@@ -58,38 +58,20 @@ class SiteController extends AbstractController
             $manager->persist($vote);
             $manager->flush();
 
-
-         
-            // $votes = $this->getDoctrine()->getRepository(Vote::class);
-            //     $votes = $allVotes->findAll();
-                
-            // dump($votes);
-            // // dump($reproMorceaux);
-
             return $this->redirectToRoute('home');
-
         }
+      
 
-
-
-        // $this->getDoctrine()->getRepository('AcmeBundle:vote')->findBy(
-        //     array(),
-        //     array('vote |lenght' => 'ASC')
-        // );
-
+//---------****-retrouver et afficher tous les morceaux dans "home"-------
 
         $morceaux = $reproMorceaux->findAll();
-        dump($morceaux);
+         dump($morceaux);
 
         return $this->render('site/home.html.twig', [
 
             'morceauBDD' => $morceaux,
-            // 'votes' => $votes,
             'controller_name' => 'SiteController',
-
             
-                // 'controller_name' => 'SiteController',
-
         ]);
 
          

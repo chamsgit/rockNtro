@@ -54,10 +54,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commentaires;
 
+
+
     public function __construct()
     {
         $this->propositions = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -220,4 +223,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    
 }

@@ -4,7 +4,10 @@
 
 
 {% block body %}
-    <h1>Votre proposition</h1>
+    <h3>Votre proposition</h3>
+
+  
+
 
     {{ form_start(formProposition) }}
         {{ form_row(formProposition.titre) }}
@@ -12,7 +15,7 @@
         {{ form_row(formProposition.lien_spotify) }}
         {# {{ form_row (formProposition|date('d/m/Y'), {'attr': {'class': 'hidden-row'}} )}} #}
 
-        <button type="submit" class="btn btn-dark">Envoyer</button>
+        <button type="submit" class="btn btn-dark "><a class="nouv" href="{{ path('entrer')}}">Envoyer</a> </button>
 
         
      {{ form_end(formProposition) }} 
@@ -20,7 +23,7 @@
 {#{% for oneProposition in propositionsBDD %}
 
      date() : filtre TWIG qui permet de formater une date / heure
- <div class="mb-1 text-muted"><small>Posté le {{ formProposition.date|date('d/m/Y') }} à {{ formProposition.date|date('H:i:s') }}</small></div> #}
+ <div class="mb-1 text-muted"><small>Posté le {{ formProposition.date|date('d/m/Y') }} à {{ formProposi}tion.date|date('H:i:s') }}</small></div> #}
 
 
 
