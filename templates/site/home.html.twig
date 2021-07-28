@@ -32,7 +32,8 @@
 
 						{# on piioche dans un objet twig #}
 						<h3 class="mb-0">{{ oneMorceau.artiste }}</h3>
-				
+						
+						<h5>{{ oneMorceau.votes|length }}</h5>
 
 						{% if app.user %}
 
@@ -63,6 +64,7 @@
 								 	Identifiez-vous pour acceder aux commentaires
 						{% endif %}
 
+						
 
 
 					</div>
