@@ -62,7 +62,7 @@ class SiteController extends AbstractController
 //---------****-retrouver et afficher tous les morceaux dans "home"-------
 
         $morceaux = $reproMorceaux->findAll();
-        // dump($morceaux);
+         dump($morceaux);
 
         return $this->render('site/home.html.twig', [
 
