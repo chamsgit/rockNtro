@@ -27,9 +27,6 @@ class Commentaire
      */
     private $date;
 
-    
-
-    
 
     /**
      * @ORM\ManyToOne(targetEntity=Morceau::class, inversedBy="commentaires")
@@ -38,9 +35,10 @@ class Commentaire
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
+
+   
 
     public function getId(): ?int
     {
@@ -71,8 +69,6 @@ class Commentaire
         return $this;
     }
 
-    
-
     public function getLemorceau(): ?Morceau
     {
         return $this->lemorceau;
@@ -96,4 +92,6 @@ class Commentaire
 
         return $this;
     }
+
+   
 }

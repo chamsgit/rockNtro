@@ -2,18 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Vote;
 use App\Entity\Morceau;
 use App\Entity\Commentaire;
 use App\Entity\Proposition;
 use App\Form\CommentaireType;
 use App\Form\PropositionType;
-use App\Repository\CommentaireRepository;
 use App\Repository\UserRepository;
-use App\Repository\MorceauRepository;
-use App\Repository\PropositionRepository;
 use App\Repository\VoteRepository;
+use App\Repository\MorceauRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CommentaireRepository;
+use App\Repository\PropositionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +27,7 @@ class SiteController extends AbstractController
      * @Route("/", name="home")
      */
 
-    public function morceau(MorceauRepository $reproMorceaux, Request $request, UserRepository $repoUser, VoteRepository $allVotes, EntityManagerInterface $manager): Response
+    public function morceau(MorceauRepository $reproMorceaux, Request $request, VoteRepository $repovote,UserRepository $repoUser, EntityManagerInterface $manager): Response
 
     {
         // Pour selectionner des données dans une table SQL en BDD? nous devons importer la classe Repository qui correspond à la table SQL, c'est à dire à l'entité correspondante (Morceau)
@@ -39,8 +40,8 @@ class SiteController extends AbstractController
       
         if($request->request->count() > 0)
         {
-            // permet de récupérer le morceau liké, l'entité complète
-            //$morceau = $reproMorceaux->find($request->request->get('idMorceau'));
+ // --------- traitement du LIKE permet de récupérer le morceau liké,
+            
             
             $mor = $reproMorceaux->find($request->request->get('idMorceau'));
             dump($mor);
@@ -57,71 +58,60 @@ class SiteController extends AbstractController
             $manager->persist($vote);
             $manager->flush();
 
-
-         
-            // $votes = $this->getDoctrine()->getRepository(Vote::class);
-            //     $votes = $allVotes->findAll();
-                
-            // dump($votes);
-            // // dump($reproMorceaux);
-
             return $this->redirectToRoute('home');
-
         }
+      
 
-
-
-        // $this->getDoctrine()->getRepository('AcmeBundle:vote')->findBy(
-        //     array(),
-        //     array('vote |lenght' => 'ASC')
-        // );
-
+//---------****-retrouver et afficher tous les morceaux dans "home"-------
 
         $morceaux = $reproMorceaux->findAll();
-        dump($morceaux);
+         dump($morceaux);
 
         return $this->render('site/home.html.twig', [
 
             'morceauBDD' => $morceaux,
-            // 'votes' => $votes,
-
-
             'controller_name' => 'SiteController',
-            'title' => 'Bienvenue',
-
+            
         ]);
+
+         
+           
+
+    
     }
      
 
-
+//-----------***** traitement des propositions  --------------------
 
 
    /**
     * @Route("/proposition", name="proposition")
     */
-   public function proposition(Request $request): Response  //request recuperation des données (GET)
+   public function proposition(Request $request): Response  
    {
         $proposition = new Proposition; // instanciation de la classe
 
         $formProposition = $this->createForm(PropositionType::class, $proposition);// on reccupére le formulaire
 
-        $formProposition->handleRequest($request);
+        $formProposition->handleRequest($request);//request recuperation des données (GET)
 
         //si le formulaire est soumis
-        if($formProposition->isSubmitted())
+        if($formProposition->isSubmitted()&& $formProposition->isValid())
         {
 
-                // on enregistre en BDD
+         // on enregistre en BDD
             $em= $this->getDoctrine()->getManager();//($em pour entity manager), ($this pour reccuper les methodes du controleur)
             $em->persist($proposition);
             $em->flush();
+            return $this->redirectToRoute('entrer');
         }
 
        return $this->render('site/proposition.html.twig', [
            'controller_name' => 'SiteController',
            'title' => 'Bienvenue',
-           'formProposition' => $formProposition->createView()       
+           'formProposition' => $formProposition->createView()      
 
+           
        ]);
   
    }
@@ -133,20 +123,22 @@ class SiteController extends AbstractController
      * 
      * @Route("/home/{id}", name="home_show")
      */
-
-    public function show(Morceau $morceau, CommentaireRepository $commentaire ,Request $request, EntityManagerInterface $manager): Response
+    public function show(Morceau $morceau,CommentaireRepository $commentaire ,Request $request, EntityManagerInterface $manager): Response
     {
    //TRAITEMENT COMMENTAIRE ARTICLE
      $commentaire = new Commentaire;
      $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
-
+     
     $formCommentaire->handleRequest($request);
         
         
           if($formCommentaire->isSubmitted()&& $formCommentaire->isValid())
-            {
+           {
+           
                $commentaire->setDate(new \dateTime());
                $commentaire->setLemorceau($morceau);
+               $commentaire->setUser($this->getUser());
+          
 
                 $manager->persist($commentaire);
                 $manager ->flush();
@@ -157,7 +149,9 @@ class SiteController extends AbstractController
                // dump($commentaire);
 
                 return $this->redirectToRoute('home_show', [
-                    'id' => $morceau->getId()
+                    'id' => $morceau->getId(),
+                   
+
                 ]);
             }
        
@@ -170,6 +164,10 @@ class SiteController extends AbstractController
             'commentaireBDD'=> $commentaire,
         ]);
     }
+
+
+
+        //-----*** recuperation des nouvelles entrées "proposition" et envoi "nouveautés"----------
 
 
 /**
