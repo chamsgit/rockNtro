@@ -6,20 +6,20 @@
     
 {% block body %}
 
+
     <h1 class="display-7  text-center my-4">Dernières propositions</h1>
 	
+
 		<div class="row mb-2" > 
 
 		
-
 				{% for oneProposition in propositionBDD | sort|reverse %}{# boucle FOR Twig : #}
-
 
 			{#	{{ dump(onemorceau) }} #}
 
 
 				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3">
-				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg ">
+				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75 ">
 
 
 					<div class="col-md-9 p-4 d-flex position-static justify-content-lg-between ">
@@ -30,7 +30,9 @@
 						<h3 class="mb-0">{{ oneProposition.artiste }}</h3>
 
 						
-						
+
+						<a href="#" class="">Voir plus...</a>
+
 
 
 					</div>
@@ -39,14 +41,15 @@
 
 					</div>
 
-					<div class="m-2 align-content-end text-muted">Posté le
+				{#	<div class="m-2 align-content-end text-muted">Posté le
 							{{ oneProposition.date|date('d/m/Y') }}
 							à
-							{{ oneProposition.date|date('H:i:s') }}</div>
+							{{ oneProposition.date|date('H:i:s') }}</div> #}
 
 				</div>
 			</div>
 		{% endfor %}
+
 	  </div>
 
 {% endblock %}

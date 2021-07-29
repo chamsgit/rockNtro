@@ -10,7 +10,7 @@
     
     <h1 class="display-4 fst-italic text-center my-4">Détails de l'article</h1> 
 
-    <div>
+    <div method="get">
 
             <div class="col-md-12 ">
 			    <iframe src="{{ morceauBDD.lienspotify }}" width="80%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
@@ -30,6 +30,10 @@
 
                     <button type="submit" class="btn btn-dark mt-2"> envoyer</button>
                  {{form_end(formCommentaire)}}
+
+                 {# <pre>
+                     {{ dump(formCommentaire) }}
+                 </pre> #}
         
            
           <h4 class="mt-5 mb-2">Vos reactions...</h4>
