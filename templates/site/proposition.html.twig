@@ -4,23 +4,24 @@
 
 
 {% block body %}
+
+
     <h1>Votre proposition</h1>
 
-    {{ form_start(formProposition) }}
-        {{ form_row(formProposition.titre) }}
-        {{ form_row(formProposition.artiste) }}
-        {{ form_row(formProposition.lien_spotify) }}
-        {# {{formProposition|date('d/m/Y')}} #}
+    <div class="bg-imgproposition">
 
-        <button type="submit" class="btn btn-dark">Envoyer</button>
+        {{ form_start(formProposition) }}
+            {{ form_row(formProposition.titre) }}
+            {{ form_row(formProposition.artiste) }}
+            {{ form_row(formProposition.lien_spotify) }}
+            {# {{formProposition|date('d/m/Y')}} #}
 
-        
-     {{ form_end(formProposition) }} 
+            <button type="submit" class="btn btn-dark">Envoyer</button>
 
-{#{% for oneProposition in propositionsBDD %}
+            
+        {{ form_end(formProposition) }} 
 
-     date() : filtre TWIG qui permet de formater une date / heure
- <div class="mb-1 text-muted"><small>Posté le {{ formProposition.date|date('d/m/Y') }} à {{ formProposition.date|date('H:i:s') }}</small></div> #}
+    </div>
 
 
 
