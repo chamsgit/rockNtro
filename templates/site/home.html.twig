@@ -17,7 +17,7 @@
 		{# 1. onemorceau : variable de reception que nous définissons dans la boucle, qui receptionne les données d'1 morceau par tour de boucle FOR #}
 		{# 2. morceauBDD : variable Twig contenant l'ensemble des données selectionné en BDD #}
 
-			{% for oneMorceau in morceauBDD |sort votes asc %}{# boucle FOR Twig : #}
+			{% for oneMorceau in morceauBDD %}{# boucle FOR Twig : #}
 			{# {% for oneMorceau in morceauBDD |sort (oneMorceau.votes order by ASC and LIMIT 50) %} #}
 			  
 

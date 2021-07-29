@@ -15,7 +15,7 @@ class PropositionType extends AbstractType
             ->add('titre')
             ->add('artiste')
             ->add('lien_spotify')
-            //->add('date')
+            // ->add('date')
             //->add('user')
         ;
         
