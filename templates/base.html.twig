@@ -28,7 +28,7 @@
                 <div class="col-4 pt-1">
 
                {% if app.user %}
-                            <span>Bonjour {{ app.user.pseudo}}</span>
+                            <span class="m-auto">Bonjour {{ app.user.pseudo}}</span>
                 {% else %}
                             <a href="{{ path('app_register') }}" class="link-secondary">Créer votre compte</a>
                 {% endif %} 
@@ -68,15 +68,12 @@
 
                 {% if app.user %}
 
-                <a class="p-1 link-secondary" href="{{ path('proposition')}}">Proprosition</a>
+                <a class="p-2 link-secondary" href="{{ path('proposition')}}">Proprosition</a>
                 
                 {% else %}
 							<a href="{{ path('app_login') }}"> </a> 
 
-
-                
-
-							<a class= 'hoverPropos text-muted' data-bs-toggle="tooltip" data-bs-placement="top" title="Se connecter pour faire une proposition" href="{{ path('app_login') }}">Proposition </a> 
+							<a class= 'text-muted' data-bs-toggle="tooltip" data-bs-placement="top" title="Se connecter pour faire une proposition" href="{{ path('app_login') }}">Proposition </a> 
 
 
 				{% endif %}
