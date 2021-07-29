@@ -30,7 +30,7 @@
                {% if app.user %}
                             <span>Bonjour {{ app.user.pseudo}}</span>
                 {% else %}
-                            <a href="{{ path('app_register') }}" class="link-secondary">Créer votre compte</a>
+                            <a href="{{ path('app_register') }}" class=" btn btn-sm btn-outline-dark ml-2">Créer votre compte</a>
                 {% endif %} 
 
 
@@ -60,15 +60,15 @@
 
             <div class="nav-scroller py-1 mb-2">
                 <nav class="nav d-flex justify-content-evenly">
-                <a class="p-1 link-secondary" href="{{ path('home') }}"><i class="bi bi-house-door-fill"></i></a>
+                <a class="p-1 link-dark" href="{{ path('home') }}"><i class="bi bi-house-door-fill"></i></a>
 
 
-               <a class="p-2 link-secondary" href="{{ path('entrer') }}">Nouveautés</a>
+               <a class="p-0 link-dark" href="{{ path('entrer') }}">Nouveautés</a>
 
 
                 {% if app.user %}
 
-                <a class="p-1 link-secondary" href="{{ path('proposition')}}">Proprosition</a>
+                <a class="p-2 link-dark" href="{{ path('proposition')}}">Proprosition</a>
                 
                 {% else %}
 							<a href="{{ path('app_login') }}"> </a> 
@@ -76,7 +76,7 @@
 
                 
 
-							<a class= 'hoverPropos text-muted' data-bs-toggle="tooltip" data-bs-placement="top" title="Se connecter pour faire une proposition" href="{{ path('app_login') }}">Proposition </a> 
+							<a class= "link-dark p-2"'hoverPropos text-muted ' data-bs-toggle="tooltip" data-bs-placement="top" title="Se connecter pour faire une proposition" href="{{ path('app_login') }}">Proposition </a> 
 
 
 				{% endif %}
@@ -85,7 +85,7 @@
 
                 </nav>
             </div>
-
+             
 
         <main class="container conteneur-base">
         {% block body %}
@@ -97,7 +97,7 @@
 
             <p>&copy; 2021 - rockNtro - Tout est RockNRoll</p>
             <p>
-                <a href="#">Revenir en haut</a>
+                <a href="{{ path('home')}}">Revenir en haut</a>
             </p>
         </footer>
 
