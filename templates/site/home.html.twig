@@ -22,7 +22,7 @@
 
 
 				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3 ">
-				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75">
+				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75 card">
 
 
 					<div class="col-md-9 p-4 d-flex position-static justify-content-around">
@@ -47,12 +47,12 @@
 								 	Identifiez-vous pour liker
 
 								</button>
-							</a>  #}
+							</a>  #} 
 						{% endif %}
 							
 						{% if app.user %}
 						
-						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link">Commentaires</a>
+						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link-dark">Commentaires</a>
 						
 						{% else %}
 							{# <a href="{{ path('app_login') }}">
@@ -77,8 +77,7 @@
 
 					<div class="m-2 align-content-end text-muted">Posté le
 							{{ oneMorceau.date|date('d/m/Y') }}
-							à
-							{{ oneMorceau.date|date('H:i:s') }}</div>
+							</div>
 
 				</div>
 			</div>
