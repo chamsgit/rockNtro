@@ -126,10 +126,10 @@
 
 .bg-imgregister {
   /* The image used */
-  background-image: url("../assets/24072020-2.jpg");
+  background-image: url("../assets/rockNtro-register.jpg");
 
   /* Control the height of the image */
-  min-height: 380px;
+  min-height: 600px;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -140,10 +140,10 @@
 
 .bg-imglogin {
   /* The image used */
-  background-image: url("../assets/24072020.jpg");
+  background-image: url("../assets/rockNtro-login.jpg");
 
   /* Control the height of the image */
-  min-height: 380px;
+  min-height: 600px;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -154,10 +154,10 @@
 
 .bg-imgproposition {
   /* The image used */
-  background-image: url("../assets/24072020-1.jpg");
+  background-image: url("../assets/rockNtro-proposition.jpg");
 
   /* Control the height of the image */
-  min-height: 380px;
+  min-height: 600px;
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -172,3 +172,12 @@ body{
   background-color: rgba(223, 223, 223, 0.849);
 }
 
+.home {
+  font-size: 25px;
+  
+}
+.entete{
+  display: flex;
+  flex-direction: row;
+  border: solid black 2px;
+}
