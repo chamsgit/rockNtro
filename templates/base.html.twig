@@ -37,7 +37,7 @@
                 </div>
                     <div class="col-4 text-center">
 
-                        <a class="blog-header-logo text-dark fst-italic" href="{{ path('home') }}"><img class="blog-header-logo" src="{{ asset('assets/logo_large.png') }}" alt=""></a>
+                        <a class="blog-header-logo text-dark fst-italic" href="{{ path('home') }}"><img class="responsive" src="{{ asset('assets/logo_large.png') }}" alt=""></a>
                         <h1 class="display-9 lead my-3 slogan"><strong> Top 50 des intros musicales </strong></h1>
 
                 </div>
@@ -46,14 +46,13 @@
                  
                      {% if app.user %}
 
-                        {# {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin') }}" class="btn btn-sm btn-outline-secondary">BACKOFFICE</a>                      
-                        {% endif %} #}
 
                         <a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-dark">Se deconnecter</a>
                     {% else %}
                         
-                        <a href="{{ path('app_login') }}" class="btn btn-sm btn-outline-dark ml-2 bgc">Identifiez-vous</a>
+
+                        <a href="{{ path('app_login') }}" class="btn btn-sm btn-outline-dark ml-2">Se Connecter</a>
+
                     {% endif %}
                 </div>
 
@@ -63,17 +62,19 @@
                 <nav class="nav d-flex justify-content-evenly">
                 <a class="p-1 link-secondary" href="{{ path('home') }}"><i class="bi bi-house-door-fill"></i></a>
 
+
                <a class="p-2 link-secondary" href="{{ path('entrer') }}">Nouveautés</a>
+
 
                 {% if app.user %}
 
                 <a class="p-1 link-secondary" href="{{ path('proposition')}}">Proprosition</a>
                 
                 {% else %}
+							<a href="{{ path('app_login') }}"> </a> 
 
-                {# <p class="alert alert " role="alert">
-                <a class="alert-link">Se connecter pour faire une proposition </a>
-                </p> #}
+
+                
 
 							<a class= 'hoverPropos text-muted' data-bs-toggle="tooltip" data-bs-placement="top" title="Se connecter pour faire une proposition" href="{{ path('app_login') }}">Proposition </a> 
 
@@ -81,9 +82,10 @@
 				{% endif %}
    
 
+
                 </nav>
             </div>
-            
+
 
         <main class="container conteneur-base">
         {% block body %}
@@ -92,6 +94,7 @@
         </main>
 
         <footer class="blog-footer">
+
             <p>&copy; 2021 - rockNtro - Tout est RockNRoll</p>
             <p>
                 <a href="#">Revenir en haut</a>
