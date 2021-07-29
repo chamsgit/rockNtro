@@ -109,8 +109,9 @@ class SiteController extends AbstractController
        return $this->render('site/proposition.html.twig', [
            'controller_name' => 'SiteController',
            'title' => 'Bienvenue',
-           'formProposition' => $formProposition->createView()       
+           'formProposition' => $formProposition->createView()      
 
+           
        ]);
   
    }
