@@ -87,13 +87,13 @@ class SiteController extends AbstractController
    /**
     * @Route("/proposition", name="proposition")
     */
-   public function proposition(Request $request): Response  
+   public function proposition(Request $request): Response  //request recuperation des données (GET)
    {
         $proposition = new Proposition; // instanciation de la classe
 
         $formProposition = $this->createForm(PropositionType::class, $proposition);// on reccupére le formulaire
 
-        $formProposition->handleRequest($request);//request recuperation des données (GET)
+        $formProposition->handleRequest($request);
 
         //si le formulaire est soumis
         if($formProposition->isSubmitted()&& $formProposition->isValid())

@@ -44,12 +44,27 @@
 							<input type="hidden" name="idMorceau" id="idMorceau" value="{{ oneMorceau.id }}">
 							</form>
 
-							<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link">Commentaires</a>
 
-                        {% else %}
-                                   {# <a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link-dark">Commentaires</a> #}
+						{% else %}
+							{# <a href="{{ path('app_login') }}">
+								<button class="btn btn-primary" name="button" value="like" >
+								 	Identifiez-vous pour liker
+
+								</button>
+							</a>  #} 
 						{% endif %}
 							
+						{% if app.user %}
+						
+						<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link-dark">Commentaires</a>
+						
+						{% else %}
+							{# <a href="{{ path('app_login') }}">
+								<button class="btn btn-link btn-outline-danger" name="button" value="like" >
+								 	Identifiez-vous pour acceder aux commentaires #}
+						{% endif %}
+
+			
 
 
 					</div>
@@ -57,29 +72,18 @@
 					<div class="col-md-12 d-flex ml-6">
 						<iframe src="{{ oneMorceau.lienspotify }}" width="90%" height="70em" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
-						{% if app.user %}
-
-							<button type="submit" class="btn btn-danger d-flex" name="button" value="like">
-								<i class="bi bi-hand-thumbs-up" ></i> <h5 >{{ oneMorceau.votes|length }}</h5>  
-							</button>
-
-						{% else %}
-						
-                            		<button type="button" class="btn btn-danger d-flex 'hoverPropos text-muted' data-bs-toggle="tooltip" data-bs-placement="top" title=" Se connecter pour liker" " name="button">
-								<i class="bi bi-hand-thumbs-up" ></i> <h5 >{{ oneMorceau.votes|length }}</h5>  
-							       </button>
-
-									 
-						{% endif %}
-
+						<button type="submit" class="btn btn-danger d-flex " name="button" value="like">
+								<i class="bi bi-hand-thumbs-up" ></i> <h5>{{  oneMorceau.votes|length }}</h5>  
+                              
+					    </button>
 
 					</div>
 
-					<div class=" date m-2 align-content-end text-muted  ">Posté le
+					<div class="m-2 align-content-end text-muted">Posté le
 							{{ oneMorceau.date|date('d/m/Y') }}
 							</div>
 
-				    </div>
+				</div>
 			</div>
 		{% endfor %} 
 	  </div>
