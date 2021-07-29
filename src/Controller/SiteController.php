@@ -96,13 +96,14 @@ class SiteController extends AbstractController
         $formProposition->handleRequest($request);
 
         //si le formulaire est soumis
-        if($formProposition->isSubmitted())
+        if($formProposition->isSubmitted()&& $formProposition->isValid())
         {
 
          // on enregistre en BDD
             $em= $this->getDoctrine()->getManager();//($em pour entity manager), ($this pour reccuper les methodes du controleur)
             $em->persist($proposition);
             $em->flush();
+            return $this->redirectToRoute('entrer');
         }
 
        return $this->render('site/proposition.html.twig', [
