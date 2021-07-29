@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
+	<br>
+	
+	<h1 class="home d-flex justify-content-center" >Les 50 meilleures intros de musique</h1>
+	
 
 
 		<div class="row mb-2" > 
@@ -22,7 +26,7 @@
 
 
 				<div class="col-md-12 d-flex  d-flex justify-content-center mb-3 ">
-				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75">
+				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75 card">
 
 
 					<div class="col-md-9 p-4 d-flex position-static justify-content-around">
@@ -42,10 +46,10 @@
 
 							<a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link">Commentaires</a>
 
-
-						{% else %}
-						
+                        {% else %}
+                                   {# <a href="{{path('home_show', {'id': oneMorceau.id}) }}" class="link-dark">Commentaires</a> #}
 						{% endif %}
+							
 
 
 					</div>
@@ -61,8 +65,8 @@
 
 						{% else %}
 						
-                            		<button type="submit" class="btn btn-danger d-flex 'hoverPropos text-muted' data-bs-toggle="tooltip" data-bs-placement="top" title=" Se connecter pour liker" " name="button" value="like">
-								<i class="bi bi-hand-thumbs-up" ></i> <h5 >{{  oneMorceau.votes|length }}</h5>  
+                            		<button type="button" class="btn btn-danger d-flex 'hoverPropos text-muted' data-bs-toggle="tooltip" data-bs-placement="top" title=" Se connecter pour liker" " name="button">
+								<i class="bi bi-hand-thumbs-up" ></i> <h5 >{{ oneMorceau.votes|length }}</h5>  
 							       </button>
 
 									 
@@ -73,8 +77,7 @@
 
 					<div class=" date m-2 align-content-end text-muted  ">Posté le
 							{{ oneMorceau.date|date('d/m/Y') }}
-							à
-							{{ oneMorceau.date|date('H:i:s') }}</div>
+							</div>
 
 				    </div>
 			</div>
