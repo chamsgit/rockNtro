@@ -101,6 +101,9 @@ class SiteController extends AbstractController
 
          // on enregistre en BDD
             $em= $this->getDoctrine()->getManager();//($em pour entity manager), ($this pour reccuper les methodes du controleur)
+            
+            $proposition->setDate(new \DateTime());
+            $proposition->setUser($this->getUser());
             $em->persist($proposition);
             $em->flush();
             return $this->redirectToRoute('entrer');
@@ -177,7 +180,7 @@ class SiteController extends AbstractController
 
     {
         $propositions = $repoProposition -> findAll();
-        // dump($propositions);
+        dump($propositions);
        
 
         return $this->render('site/nouveaute.html.twig', [
