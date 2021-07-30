@@ -29,11 +29,8 @@
 						{# on piioche dans un objet twig #}
 						<h5 class="mb-1"><span class="text-primary"> Artiste: </span>{{ oneProposition.artiste }}</h5>
 
-						
 
 						{# <a href="#" class="">Voir plus...</a> #}
-
-
 
 					</div>
 					<div class="col-md-12 ">
@@ -42,10 +39,10 @@
 
 					</div>
 
-				{#	<div class="m-2 align-content-end text-muted">Posté le
+					<div class="m-2 align-content-end text-muted">Posté le
 							{{ oneProposition.date|date('d/m/Y') }}
 							à
-							{{ oneProposition.date|date('H:i:s') }}</div> #}
+							{{ oneProposition.date|date('H:i:s') }} par {{ oneProposition.user.pseudo }}</div>
 
 				</div>
 			</div>
