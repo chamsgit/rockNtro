@@ -22,17 +22,19 @@
 				 <div class="row  g-0 border rounded overflow-hidden flex-md-row shadow-lg w-75 ">
 
 
-					<div class="col-md-9 p-4 d-flex position-static justify-content-lg-between ">
+					<div class="col-md-9 p-4 d-flex position-static justify-content-around">
 
-						<strong class="d-inline-block mb-2 text-primary"> Titre: {{ oneProposition.titre }} </strong>
+						<strong class="d-inline-block mb-2"> <span class="text-primary"> Titre:</span> {{ oneProposition.titre }} </strong>
 
 						{# on piioche dans un objet twig #}
-						<h3 class="mb-0">{{ oneProposition.artiste }}</h3>
+						<h5 class="mb-1"><span class="text-primary"> Artiste: </span>{{ oneProposition.artiste }}</h5>
 
+
+						{# <a href="#" class="">Voir plus...</a> #}
 
 					</div>
 					<div class="col-md-12 ">
-						<iframe src="{{ oneProposition.lienspotify }}" width="80%" height="70em" frameborder="0"
+						<iframe src="{{ oneProposition.lienspotify }}" width="100%" height="70em" frameborder="0"
 						 allowtransparency="true" allow="encrypted-media"></iframe>
 
 					</div>
