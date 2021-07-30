@@ -34,7 +34,6 @@ class Vote
         return $this->id;
     }
 
-
     public function getUserId(): ?user
     {
         return $this->user_id;
